@@ -10,5 +10,8 @@
 
    public static class Bmi
    {
+      private enum BmiReading{ Underweight, Healthy, Overweight }
+      
+//      private static void
    }
 }
