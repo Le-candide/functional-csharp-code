@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using LaYumba.Functional;
 using static LaYumba.Functional.F;
 using System.Text.RegularExpressions;
+using NUnit.Framework;
 
 namespace Exercises.Chapter3
 {
@@ -33,7 +34,7 @@ namespace Exercises.Chapter3
       public static Option<T> Lookup<T>(this IEnumerable<T> ts, Func<T, bool> pred)
       {
          foreach (T t in ts) if (pred(t)) return Some(t);
-         return None;
+         return F.None;
       }
 
       // 3 Write a type Email that wraps an underlying string, enforcing that it’s in a valid
@@ -53,7 +54,7 @@ namespace Exercises.Chapter3
          public static Option<Email> Create(string s)
             => regex.IsMatch(s) 
                ? Some(new Email(s)) 
-               : None;
+               : F.None;
 
          public static implicit operator string(Email e)
             => e.Value;
@@ -82,7 +83,7 @@ namespace Exercises.Chapter3
 
          public Option<T> Get<T>(string key)
             => source[key] == null
-               ? None
+               ? F.None
                : Some((T)Convert.ChangeType(source[key], typeof(T)));
 
          public T Get<T>(string key, T defaultValue)
@@ -91,4 +92,6 @@ namespace Exercises.Chapter3
                (value) => value);
       }
    }
+
+   
 }
